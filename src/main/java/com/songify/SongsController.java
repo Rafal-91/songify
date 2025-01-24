@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 @Log4j2
 public class SongsController {
 
-    Map<Integer, String> database = new HashMap<>();
+    private Map<Integer, String> database = new HashMap<>();
 
     @GetMapping("/songs")
     public ResponseEntity<SongsResponseDto> getAllSongs(@RequestParam(required = false) Integer limit){
