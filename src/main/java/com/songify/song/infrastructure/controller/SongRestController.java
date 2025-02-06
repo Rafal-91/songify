@@ -21,10 +21,12 @@ public class SongRestController {
 
     private final SongAdder songAdder;
     private final SongRetriever songRetriever;
+    private final ArtistSaver artistSaver;
 
-    public SongRestController(SongAdder songAdder, SongRetriever songRetriever) {
+    public SongRestController(SongAdder songAdder, SongRetriever songRetriever, ArtistSaver artistSaver) {
         this.songAdder = songAdder;
         this.songRetriever = songRetriever;
+        this.artistSaver = artistSaver;
     }
 
     @GetMapping
@@ -54,6 +56,12 @@ public class SongRestController {
     @PostMapping
     public ResponseEntity<CreateSongResponseDto> postSong(@RequestBody @Valid CreateSongRequestDto request) {
         Song song = SongMapper.mapFromCreateSongRequestDtoToSong(request);
+
+        artistSaver.addArtist(song.artist());
+        artistSaver.printArtists();
+        artistSaver.printArtistsSize();
+        artistSaver.printSaverName();
+
         songAdder.addSong(song);
         CreateSongResponseDto body = SongMapper.mapFromSongToCreateSongResponseDto(song);
         return ResponseEntity.ok(body);
