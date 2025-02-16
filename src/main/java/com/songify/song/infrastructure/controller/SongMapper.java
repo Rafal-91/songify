@@ -20,7 +20,7 @@ public class SongMapper {
     }
 
     public static Song mapFromUpdateSongRequestDtoToSong(UpdateSongRequestDto dto) {
-        return new Song(dto.songName(), dto.artist());
+        return new Song(dto.songName(), dto.artistName());
     }
 
     public static Song mapFromPartiallyUpdateSongRequestDtoToSong(PartiallyUpdateSongRequestDto dto) {

@@ -9,5 +9,5 @@ public record UpdateSongRequestDto(
         String songName,
         @NotNull(message = "artist must not be null")
         @NotEmpty(message = "artist must not be empty")
-        String artist) {
+        String artistName) {
 }
