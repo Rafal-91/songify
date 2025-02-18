@@ -79,10 +79,9 @@ public class SongRestController {
             throw new SongNotFoundException("Song with id " + id + " not found");
         }
         Song newSong = SongMapper.mapFromUpdateSongRequestDtoToSong(request);
-        Song oldSong = allSongs.put(id, newSong);
-        log.info("Updated song with id: " + id +
-                " with oldSongName: " + oldSong.name() + " to newSongName: " + newSong.name() +
-                " oldArtist: " + oldSong.artist() + " to newArtist: " + newSong.artist());
+        Song oldSong = allSongs.get(id);
+        allSongs.put(id, newSong);
+        log.info("Updated song with id: {} with oldSongName: {} to newSongName: {} oldArtist: {} to newArtist: {}", id, oldSong.name(), newSong.name(), oldSong.artist(), newSong.artist());
         UpdateSongResponseDto body = SongMapper.mapFromSongToUpdateSongResponseDto(newSong);
         return ResponseEntity.ok(body);
     }
