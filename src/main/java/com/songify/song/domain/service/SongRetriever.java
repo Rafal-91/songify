@@ -34,7 +34,7 @@ public class SongRetriever {
         return songRepository.findById(id);
     }
 
-    public void existById(Long id) {
+    public void existsById(Long id) {
         findSongById(id)
                 .orElseThrow(() -> new SongNotFoundException("Song with id " + id + " not found"));
     }
