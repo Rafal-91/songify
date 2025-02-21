@@ -1,10 +1,7 @@
 package com.songify.song.domain.model;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Generated;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Builder
 @Entity
@@ -24,9 +21,6 @@ public class Song {
     @Column(nullable = false)
     String artist;
 
-    @Column
-    String album;
-
     public Song() {
 
     }
@@ -36,11 +30,10 @@ public class Song {
         this.artist = artist;
     }
 
-    public Song(Long id, String name, String artist, String album) {
+    public Song(Long id, String name, String artist) {
         this.id = id;
         this.name = name;
         this.artist = artist;
-        this.album = album;
     }
 
 }
