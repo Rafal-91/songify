@@ -12,12 +12,16 @@ import org.springframework.stereotype.Service;
 public class SongUpdater {
 
     private final SongRepository songRepository;
+    private final SongRetriever songRetriever;
 
-    public SongUpdater(SongRepository songRepository) {
+    public SongUpdater(SongRepository songRepository, SongRetriever songRetriever) {
         this.songRepository = songRepository;
+        this.songRetriever = songRetriever;
     }
 
     public void updateSongById(Long id, Song song) {
+        songRetriever.existsSongById(id);
+        log.info("updating song by id: {}", id);
         songRepository.updateById(id, song);
     }
 }
