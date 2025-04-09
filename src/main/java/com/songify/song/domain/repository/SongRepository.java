@@ -17,6 +17,8 @@ public interface SongRepository extends Repository<Song, Long> {
 
     Optional<Song> findById(Long id);
 
+    List<Song> findByArtistEqualsIgnoreCase(String artist);
+
     @Modifying
     @Query("DELETE FROM Song s WHERE s.id = :id")
     void deleteById(Long id);

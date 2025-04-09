@@ -8,6 +8,7 @@ import lombok.*;
 @Generated
 @Getter
 @Setter
+@ToString
 @Table(name = "song")
 public class Song {
 

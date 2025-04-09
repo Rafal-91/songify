@@ -41,6 +41,8 @@ public class SongRestController {
     public ResponseEntity<GetSongResponseDto> getSongById(@PathVariable Long id, @RequestHeader(required = false) String requestId) {
         log.info(requestId);
         Song song = songRetriever.findSongById(id);
+        List<Song> artists = songRetriever.findByArtistEqualsIgnoreCase();
+        log.info(artists);
         GetSongResponseDto response = mapFromSongToGetSongResponseDto(song);
         return ResponseEntity.ok(response);
     }

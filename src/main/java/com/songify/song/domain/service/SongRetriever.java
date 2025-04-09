@@ -28,6 +28,10 @@ public class SongRetriever {
                 .orElseThrow(() -> new SongNotFoundException("Song with id " + id + " not found"));
     }
 
+    public List<Song> findByArtistEqualsIgnoreCase() {
+        return songRepository.findByArtistEqualsIgnoreCase("Ariana Grande");
+    }
+
     public void existsSongById(Long id) {
         if(!songRepository.existsSongById(id))
             throw new SongNotFoundException("Song with id " + id + " not found");
