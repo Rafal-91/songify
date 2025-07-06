@@ -31,7 +31,7 @@ public class SongRestController {
     private final SongUpdater songUpdater;
 
     @GetMapping
-    public ResponseEntity<GetAllSongsResponseDto> getAllSongs(@PageableDefault(page = 0, size = 10)Pageable pageable) {
+    public ResponseEntity<GetAllSongsResponseDto> getAllSongs(@PageableDefault(page = 0, size = 100)Pageable pageable) {
         List<Song> allSongs = songRetriever.findAll(pageable);
         GetAllSongsResponseDto response = mapFromSongToGetAllSongsResponseDto(allSongs);
         return ResponseEntity.ok(response);
@@ -83,5 +83,11 @@ public class SongRestController {
         Song savedSong = songUpdater.updatePartiallyById(id, updatedSong);
         PartiallyUpdateSongResponseDto body = mapFromSongToPartiallyUpdateSongResponseDto(savedSong);
         return ResponseEntity.ok(body);
+    }
+
+    @GetMapping("/test")
+    public ResponseEntity<GetSongResponseDto> test() {
+        songRetriever.compareSongs();
+        return ResponseEntity.ok().build();
     }
 }
