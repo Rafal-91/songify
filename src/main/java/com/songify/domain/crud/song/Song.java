@@ -18,8 +18,8 @@ import lombok.Setter;
 import java.time.Instant;
 
 @Builder
-@Entity
 @Getter
+@Entity
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -27,7 +27,8 @@ class Song extends BaseEntity {
 
     @Id
     @GeneratedValue(generator = "song_id_seq", strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name = "song_id_seq",
+    @SequenceGenerator(
+            name = "song_id_seq",
             sequenceName = "song_id_seq",
             allocationSize = 1
     )
@@ -39,15 +40,14 @@ class Song extends BaseEntity {
     @Column(nullable = false)
     private String artist;
 
-    private Instant releasedDate;
+    private Instant releaseDate;
 
     private Long duration;
 
     @Enumerated(EnumType.STRING)
     private SongLanguage language;
 
-    public Song(String name, String artist) {
+    public Song(String name) {
         this.name = name;
-        this.artist = artist;
     }
 }

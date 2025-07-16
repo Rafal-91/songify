@@ -10,14 +10,11 @@ import java.util.Optional;
 
 public interface SongRepository extends Repository<Song, Long> {
 
-    Song save(Song song);
-
     @Query("SELECT s FROM Song s")
     List<Song> findAll(Pageable pageable);
 
+    @Query("SELECT s FROM Song s WHERE s.id =:id")
     Optional<Song> findById(Long id);
-
-    List<Song> findByArtistEqualsIgnoreCase(String artist);
 
     @Modifying
     @Query("DELETE FROM Song s WHERE s.id = :id")
@@ -27,6 +24,7 @@ public interface SongRepository extends Repository<Song, Long> {
     @Query("UPDATE Song s SET s.name = :#{#newSong.name}, s.artist = :#{#newSong.artist} WHERE s.id = :id")
     void updateById(Long id, Song newSong);
 
-    boolean existsSongById(Long id);
+    Song save(Song song);
 
+    boolean existsById(Long id);
 }
