@@ -1,0 +1,26 @@
+package com.songify.domain.crud.genre;
+
+import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Entity
+@NoArgsConstructor
+@Getter(AccessLevel.PACKAGE)
+@Setter(AccessLevel.PACKAGE)
+class Genre {
+
+    @Id
+    @GeneratedValue(generator = "genre_id_seq", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(
+            name = "genre_id_seq",
+            sequenceName = "genre_id_seq",
+            allocationSize = 1
+    )
+    private Long id;
+
+    private String name;
+
+}
