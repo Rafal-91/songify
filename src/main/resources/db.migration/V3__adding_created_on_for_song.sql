@@ -1,0 +1,2 @@
+ALTER TABLE song
+    ADD creation_date TIMESTAMP WITH TIME ZONE;

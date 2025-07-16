@@ -1,8 +1,10 @@
 package com.songify.song.domain.model;
 
 import jakarta.persistence.MappedSuperclass;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -11,6 +13,9 @@ public abstract class BaseEntity implements Serializable {
 
     public UUID uuid = UUID.randomUUID();
 
+    @CreationTimestamp
+    public Instant creationDate;
+    
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
