@@ -40,6 +40,7 @@ class Song extends BaseEntity {
     @Column(nullable = false)
     private String artist;
 
+//    @Column(name = "released_date")
     private Instant releaseDate;
 
     private Long duration;

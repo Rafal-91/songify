@@ -1,4 +1,4 @@
-package com.songify.domain.crud.album;
+package com.songify.domain.crud.song;
 
 import com.songify.domain.crud.util.BaseEntity;
 import jakarta.persistence.*;
