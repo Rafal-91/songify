@@ -1,2 +1,2 @@
 ALTER TABLE song
-    ADD creation_date TIMESTAMP WITH TIME ZONE;
+    ADD created_on TIMESTAMP(6) WITH TIME ZONE DEFAULT now();

@@ -14,6 +14,7 @@ import com.songify.infrastructure.crud.song.controller.dto.response.UpdateSongRe
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
@@ -47,7 +48,7 @@ class SongRestController {
     private final SongCrudFacade songFacade;
 
     @GetMapping
-    ResponseEntity<GetAllSongsResponseDto> getAllSongs(@PageableDefault(page = 0, size = 10) Pageable pageable) {
+    ResponseEntity<GetAllSongsResponseDto> getAllSongs(@PageableDefault() Pageable pageable) {
         List<SongDto> allSongs = songFacade.findAll(pageable);
         GetAllSongsResponseDto response = mapFromSongToGetAllSongsResponseDto(allSongs);
         return ResponseEntity.ok(response);

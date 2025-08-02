@@ -14,7 +14,7 @@ public abstract class BaseEntity implements Serializable {
     public UUID uuid = UUID.randomUUID();
 
     @CreationTimestamp
-    public Instant creationDate;
+    public Instant createdOn;
     
     @Override
     public boolean equals(Object o) {
