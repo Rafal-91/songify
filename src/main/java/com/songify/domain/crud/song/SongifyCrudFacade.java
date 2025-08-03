@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
@@ -27,6 +28,7 @@ public class SongifyCrudFacade {
     private final ArtistAdder artistAdder;
     private final GenreAdder genreAdder;
     private final AlbumAdder albumAdder;
+    private final ArtistRetriever artistRetriever;
 
     public ArtistDto addArtist(ArtistRequestDto artistRequestDto){
         return artistAdder.addArtist(artistRequestDto.name());
@@ -42,6 +44,10 @@ public class SongifyCrudFacade {
 
     public SongDto addSong(final SongRequestDto songRequestDto) {
         return songAdder.addSong(songRequestDto);
+    }
+
+    public Set<ArtistDto> findAllArtists(){
+        return artistRetriever.findAllArtists();
     }
 
     public List<SongDto> findAll(Pageable pageable) {
