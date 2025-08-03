@@ -7,6 +7,7 @@ import com.songify.domain.crud.song.dto.ArtistRequestDto;
 import com.songify.domain.crud.song.dto.GenreDto;
 import com.songify.domain.crud.song.dto.GenreRequestDto;
 import com.songify.domain.crud.song.dto.SongDto;
+import com.songify.domain.crud.song.dto.SongRequestDto;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -37,6 +38,10 @@ public class SongifyCrudFacade {
 
     public AlbumDto addAlbumWithSong(final AlbumRequestDto albumRequestDto) {
         return albumAdder.addAlbum(albumRequestDto.songId(), albumRequestDto.title(), albumRequestDto.releaseDate());
+    }
+
+    public SongDto addSong(final SongRequestDto songRequestDto) {
+        return songAdder.addSong(songRequestDto);
     }
 
     public List<SongDto> findAll(Pageable pageable) {
@@ -79,18 +84,6 @@ public class SongifyCrudFacade {
                 .name(toSave.getName())
                 .build();
 
-    }
-
-    public SongDto addSong(final SongDto songDto) {
-        // some domain validator
-        String name = songDto.name();
-        Song vaidatedAndReadytoSaveSong = new Song(name);
-        // some domain validator ended checking
-        Song addedSong = songAdder.addSong(vaidatedAndReadytoSaveSong);
-        return SongDto.builder()
-                .id(addedSong.getId())
-                .name(addedSong.getName())
-                .build();
     }
 
     public void deleteById(Long id) {
