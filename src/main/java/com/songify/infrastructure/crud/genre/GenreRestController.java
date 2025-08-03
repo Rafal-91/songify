@@ -1,4 +1,4 @@
-package com.songify.infrastructure.crud.song.controller;
+package com.songify.infrastructure.crud.genre;
 
 import com.songify.domain.crud.song.SongifyCrudFacade;
 import com.songify.domain.crud.song.dto.GenreDto;
