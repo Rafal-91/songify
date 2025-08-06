@@ -1,8 +1,8 @@
 package com.songify.infrastructure.crud.genre;
 
-import com.songify.domain.crud.song.SongifyCrudFacade;
-import com.songify.domain.crud.song.dto.GenreDto;
-import com.songify.domain.crud.song.dto.GenreRequestDto;
+import com.songify.domain.crud.SongifyCrudFacade;
+import com.songify.domain.crud.dto.GenreDto;
+import com.songify.domain.crud.dto.GenreRequestDto;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

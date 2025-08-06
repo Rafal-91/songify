@@ -1,5 +1,7 @@
-package com.songify.domain.crud.song;
+package com.songify.domain.crud;
 
+import com.songify.domain.crud.Artist;
+import com.songify.domain.crud.Song;
 import com.songify.domain.crud.util.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -34,7 +36,7 @@ class Album extends BaseEntity {
     private Set<Song> songs = new HashSet<>();
 
     @ManyToMany(mappedBy = "albums")
-    private Set<Artist> artist = new HashSet<>();
+    private Set<Artist> artists = new HashSet<>();
 
     void addSongToAlbum(final Song song){
         songs.add(song);

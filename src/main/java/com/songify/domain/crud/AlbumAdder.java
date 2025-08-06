@@ -1,6 +1,6 @@
-package com.songify.domain.crud.song;
+package com.songify.domain.crud;
 
-import com.songify.domain.crud.song.dto.AlbumDto;
+import com.songify.domain.crud.dto.AlbumDto;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

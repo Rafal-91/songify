@@ -1,4 +1,4 @@
-package com.songify.domain.crud.song.dto;
+package com.songify.domain.crud.dto;
 
 import java.time.Instant;
 

@@ -1,8 +1,8 @@
-package com.songify.domain.crud.song;
+package com.songify.domain.crud;
 
-import com.songify.domain.crud.song.dto.SongDto;
-import com.songify.domain.crud.song.dto.SongLanguageDto;
-import com.songify.domain.crud.song.dto.SongRequestDto;
+import com.songify.domain.crud.dto.SongDto;
+import com.songify.domain.crud.dto.SongLanguageDto;
+import com.songify.domain.crud.dto.SongRequestDto;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;

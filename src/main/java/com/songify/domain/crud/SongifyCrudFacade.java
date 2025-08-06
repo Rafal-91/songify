@@ -1,13 +1,14 @@
-package com.songify.domain.crud.song;
+package com.songify.domain.crud;
 
-import com.songify.domain.crud.song.dto.AlbumDto;
-import com.songify.domain.crud.song.dto.AlbumRequestDto;
-import com.songify.domain.crud.song.dto.ArtistDto;
-import com.songify.domain.crud.song.dto.ArtistRequestDto;
-import com.songify.domain.crud.song.dto.GenreDto;
-import com.songify.domain.crud.song.dto.GenreRequestDto;
-import com.songify.domain.crud.song.dto.SongDto;
-import com.songify.domain.crud.song.dto.SongRequestDto;
+import com.songify.domain.crud.dto.AlbumDto;
+import com.songify.domain.crud.dto.AlbumInfo;
+import com.songify.domain.crud.dto.AlbumRequestDto;
+import com.songify.domain.crud.dto.ArtistDto;
+import com.songify.domain.crud.dto.ArtistRequestDto;
+import com.songify.domain.crud.dto.GenreDto;
+import com.songify.domain.crud.dto.GenreRequestDto;
+import com.songify.domain.crud.dto.SongDto;
+import com.songify.domain.crud.dto.SongRequestDto;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,7 @@ public class SongifyCrudFacade {
     private final GenreAdder genreAdder;
     private final AlbumAdder albumAdder;
     private final ArtistRetriever artistRetriever;
+    private final AlbumRetriever albumRetriever;
 
     public ArtistDto addArtist(ArtistRequestDto artistRequestDto){
         return artistAdder.addArtist(artistRequestDto.name());
@@ -48,6 +50,10 @@ public class SongifyCrudFacade {
 
     public Set<ArtistDto> findAllArtists(Pageable pageable){
         return artistRetriever.findAllArtists(pageable);
+    }
+
+    public AlbumInfo findAlbumByIdWithArtistsAndSongs(Long id){
+        return albumRetriever.findAlbumByIdWithSongsAndArtists(id);
     }
 
     public List<SongDto> findAllSongs(Pageable pageable) {

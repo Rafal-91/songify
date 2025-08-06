@@ -1,8 +1,8 @@
 package com.songify.infrastructure.crud.artist;
 
-import com.songify.domain.crud.song.SongifyCrudFacade;
-import com.songify.domain.crud.song.dto.ArtistDto;
-import com.songify.domain.crud.song.dto.ArtistRequestDto;
+import com.songify.domain.crud.SongifyCrudFacade;
+import com.songify.domain.crud.dto.ArtistDto;
+import com.songify.domain.crud.dto.ArtistRequestDto;
 import lombok.AllArgsConstructor;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Pageable;
