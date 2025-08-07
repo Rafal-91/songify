@@ -13,7 +13,7 @@ public interface AlbumInfo {
 
     Set<SongInfo> getSongs();
 
-//    Set<ArtistInfo> getArtists();
+    Set<ArtistInfo> getArtists();
 
     interface SongInfo {
         Long getId();
@@ -24,7 +24,7 @@ public interface AlbumInfo {
 
         Long getDuration();
 
-//        GenreInfo getGenre();
+        GenreInfo getGenre();
 
         interface GenreInfo {
             Long getId();
