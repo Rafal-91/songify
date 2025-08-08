@@ -1,7 +1,5 @@
 package com.songify.domain.crud;
 
-import com.songify.domain.crud.Artist;
-import com.songify.domain.crud.Song;
 import com.songify.domain.crud.util.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -45,5 +43,9 @@ class Album extends BaseEntity {
     void removeArtist(final Artist artist) {
         artists.remove(artist);
         artist.removeAlbum(this);
+    }
+
+    void addArtist(final Artist artist) {
+        artists.add(artist);
     }
 }
