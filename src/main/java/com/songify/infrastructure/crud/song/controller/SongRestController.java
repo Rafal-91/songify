@@ -48,7 +48,7 @@ class SongRestController {
     private final SongifyCrudFacade songFacade;
 
     @GetMapping
-    ResponseEntity<GetAllSongsResponseDto> getAllSongs(@ParameterObject @PageableDefault() Pageable pageable) {
+    ResponseEntity<GetAllSongsResponseDto> getAllSongs(@ParameterObject @PageableDefault(page = 0, size = 10) Pageable pageable) {
         List<SongDto> allSongs = songFacade.findAllSongs(pageable);
         GetAllSongsResponseDto response = mapFromSongToGetAllSongsResponseDto(allSongs);
         return ResponseEntity.ok(response);

@@ -7,8 +7,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 interface SongRepository extends Repository<Song, Long> {
+
+    @Modifying
+    @Query("delete from Song s where s.id in :ids")
+    int delteByIdIn(Set<Long> ids);
 
     @Query("""
             SELECT s FROM Song s
