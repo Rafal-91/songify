@@ -55,6 +55,10 @@ public class SongifyCrudFacade {
         return songAdder.addSong(songRequestDto);
     }
 
+    public ArtistDto addArtistWithDefaultAlbumAndSong(ArtistRequestDto dto) {
+        return artistAdder.addArtistWithDefaultAlbumAndSong(dto);
+    }
+
     public Set<ArtistDto> findAllArtists(Pageable pageable){
         return artistRetriever.findAllArtists(pageable);
     }
