@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 class ArtistUpdater {
 
-    private final ArtistRepository artistRepository;
     private final ArtistRetriever artistRetriever;
+    private final ArtistRepository artistRepository;
 
     ArtistDto updateArtistNameById(final Long artistId, final String name) {
         Artist artist = artistRetriever.findById(artistId);
