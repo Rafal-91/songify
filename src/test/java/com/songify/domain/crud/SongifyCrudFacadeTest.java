@@ -4,6 +4,8 @@ import com.songify.domain.crud.dto.ArtistDto;
 import com.songify.domain.crud.dto.ArtistRequestDto;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 class SongifyCrudFacadeTest {
 
     SongifyCrudFacade songifyCrudFacade = SongifyCrudFacadeConfiguration.createSongifyCrud(
@@ -15,11 +17,13 @@ class SongifyCrudFacadeTest {
 
     @Test
     public void first() {
-        ArtistRequestDto shawnMendes = ArtistRequestDto.builder()
+        ArtistRequestDto artistRequestDto = ArtistRequestDto.builder()
                 .name("amigo")
                 .build();
-        ArtistDto response = songifyCrudFacade.addArtist(shawnMendes);
+        ArtistDto response = songifyCrudFacade.addArtist(artistRequestDto);
 
+        assertThat(response.id()).isEqualTo(5L);
+//        assert response.id().equals(5L);
     }
 
     @Test
@@ -29,6 +33,8 @@ class SongifyCrudFacadeTest {
                 .build();
         ArtistDto response = songifyCrudFacade.addArtist(shawnMendes);
 
+        assertThat(response.id()).isEqualTo(0L);
+        assertThat(response.name()).isEqualTo("shawn mendes");
     }
 
 //    @Test
