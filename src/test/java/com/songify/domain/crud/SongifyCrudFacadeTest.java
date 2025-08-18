@@ -4,8 +4,11 @@ import com.songify.domain.crud.dto.ArtistDto;
 import com.songify.domain.crud.dto.ArtistRequestDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.data.domain.Pageable;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class SongifyCrudFacadeTest {
 
@@ -23,11 +26,15 @@ class SongifyCrudFacadeTest {
         ArtistRequestDto shawnMendes = ArtistRequestDto.builder()
                 .name("amigo")
                 .build();
+        Set<ArtistDto> allArtists = songifyCrudFacade.findAllArtists(Pageable.unpaged());
+        assertTrue(allArtists.isEmpty());
         // when
         ArtistDto response = songifyCrudFacade.addArtist(shawnMendes);
         // then
         assertThat(response.id()).isEqualTo(0L);
         assertThat(response.name()).isEqualTo("amigo");
+        int size = songifyCrudFacade.findAllArtists(Pageable.unpaged()).size();
+        assertThat(size).isEqualTo(1);
     }
 
     @Test
@@ -37,11 +44,15 @@ class SongifyCrudFacadeTest {
         ArtistRequestDto shawnMendes = ArtistRequestDto.builder()
                 .name("shawn mendes")
                 .build();
+        Set<ArtistDto> allArtists = songifyCrudFacade.findAllArtists(Pageable.unpaged());
+        assertTrue(allArtists.isEmpty());
         // when
         ArtistDto response = songifyCrudFacade.addArtist(shawnMendes);
         // then
         assertThat(response.id()).isEqualTo(0L);
         assertThat(response.name()).isEqualTo("shawn mendes");
+        int size = songifyCrudFacade.findAllArtists(Pageable.unpaged()).size();
+        assertThat(size).isEqualTo(1);
     }
 
 //    @Test
