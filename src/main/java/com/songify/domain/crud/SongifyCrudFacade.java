@@ -115,6 +115,10 @@ public class SongifyCrudFacade {
         songDeleter.deleteById(id);
     }
 
+    public Set<AlbumDto> findAlbumsByArtistId(Long artistId) {
+        return albumRetriever.findAlbumsDtoByArtistId(artistId);
+    }
+
     public ArtistDto updateArtistNameById(final Long artistId, String newArtistName) {
         return artistUpdater.updateArtistNameById(artistId, newArtistName);
     }
