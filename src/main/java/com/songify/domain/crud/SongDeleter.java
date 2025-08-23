@@ -21,7 +21,7 @@ class SongDeleter {
     }
 
     void deleteAllSongsById(final Set<Long> songsIds) {
-        songRepository.delteByIdIn(songsIds);
+        songRepository.deleteByIdIn(songsIds);
     }
 
 //    void deleteSongAndGenreById(final Long songId) {

@@ -123,6 +123,18 @@ public class SongifyCrudFacade {
         return artistUpdater.updateArtistNameById(artistId, newArtistName);
     }
 
+    long countArtistsByAlbumId(final Long albumId) {
+        return albumRetriever.countArtistsByAlbumId(albumId);
+    }
+
+    public AlbumDto findAlbumById(final Long albumId) {
+        return albumRetriever.findDtoById(albumId);
+    }
+
+    public Set<AlbumDto> findAllAlbums() {
+        return albumRetriever.findAll();
+    }
+
 //   public void deleteSongAndGenreById(Long songId) {
 //   songDeleter.deleteSongAndGenreById(songId);
 //    }

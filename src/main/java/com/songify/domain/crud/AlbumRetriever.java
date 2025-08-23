@@ -19,6 +19,12 @@ class AlbumRetriever {
                 .orElseThrow(() -> new AlbumNotFoundException("Album with id: " + id + " not found"));
     }
 
+    long countArtistsByAlbumId(final Long id) {
+        return findById(id)
+                .getArtists()
+                .size();
+    }
+
     Set<Album> findAlbumsByArtistId(final Long id) {
         return albumRepository.findAllAlbumsByArtistId(id);
     }
@@ -34,5 +40,20 @@ class AlbumRetriever {
                 .orElseThrow(
                         () -> new AlbumNotFoundException("Album with id: " + albumId + " not found")
                 );
+    }
+
+    AlbumDto findDtoById(final Long albumId) {
+        Album album = findById(albumId);
+        return new AlbumDto(
+                album.getId(),
+                album.getTitle()
+        );
+    }
+
+    Set<AlbumDto> findAll() {
+        return albumRepository.findAll()
+                .stream()
+                .map(album -> new AlbumDto(album.getId(), album.getTitle()))
+                .collect(Collectors.toSet());
     }
 }

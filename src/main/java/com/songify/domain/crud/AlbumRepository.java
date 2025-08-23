@@ -35,4 +35,6 @@ interface AlbumRepository extends Repository<Album, Long> {
             """)
     Set<Album> findAllAlbumsByArtistId(Long id);
 
+    Set<Album> findAll();
+
 }
