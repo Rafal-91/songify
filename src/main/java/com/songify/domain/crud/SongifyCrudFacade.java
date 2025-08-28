@@ -35,7 +35,7 @@ public class SongifyCrudFacade {
     private final ArtistAssigner artistAssigner;
     private final ArtistUpdater artistUpdater;
 
-    public ArtistDto addArtist(ArtistRequestDto artistRequestDto){
+    public ArtistDto addArtist(ArtistRequestDto artistRequestDto) {
         return artistAdder.addArtist(artistRequestDto.name());
     }
 
@@ -43,12 +43,12 @@ public class SongifyCrudFacade {
         artistAssigner.addArtistToAlbum(artistId, albumId);
     }
 
-    public GenreDto addGenre(GenreRequestDto genreRequestDto){
+    public GenreDto addGenre(GenreRequestDto genreRequestDto) {
         return genreAdder.addGenre(genreRequestDto.name());
     }
 
     public AlbumDto addAlbumWithSong(final AlbumRequestDto albumRequestDto) {
-        return albumAdder.addAlbum(albumRequestDto.songId(), albumRequestDto.title(), albumRequestDto.releaseDate());
+        return albumAdder.addAlbum(albumRequestDto.songIds(), albumRequestDto.title(), albumRequestDto.releaseDate());
     }
 
     public SongDto addSong(final SongRequestDto songRequestDto) {
@@ -59,16 +59,12 @@ public class SongifyCrudFacade {
         return artistAdder.addArtistWithDefaultAlbumAndSong(dto);
     }
 
-    public Set<ArtistDto> findAllArtists(Pageable pageable){
+    public Set<ArtistDto> findAllArtists(Pageable pageable) {
         return artistRetriever.findAllArtists(pageable);
     }
 
-    public AlbumInfo findAlbumByIdWithArtistsAndSongs(Long id){
+    public AlbumInfo findAlbumByIdWithArtistsAndSongs(Long id) {
         return albumRetriever.findAlbumByIdWithSongsAndArtists(id);
-    }
-
-    public void deleteArtistByIdWithAlbumsAndSongs(Long artistId){
-        artistDeleter.deleteArtistByIdWithAlbumsAndSongs(artistId);
     }
 
     public List<SongDto> findAllSongs(Pageable pageable) {
@@ -77,6 +73,22 @@ public class SongifyCrudFacade {
 
     public SongDto findSongDtoById(Long id) {
         return songRetriever.findSongDtoById(id);
+    }
+
+    public Set<AlbumDto> findAlbumsByArtistId(Long artistId) {
+        return albumRetriever.findAlbumsDtoByArtistId(artistId);
+    }
+
+    public AlbumDto findAlbumById(final Long albumId) {
+        return albumRetriever.findDtoById(albumId);
+    }
+
+    public Set<AlbumDto> findAllAlbums() {
+        return albumRetriever.findAll();
+    }
+
+    public ArtistDto updateArtistNameById(final Long artistId, String newArtistName) {
+        return artistUpdater.updateArtistNameById(artistId, newArtistName);
     }
 
     public void updateSongById(Long id, SongDto newSongDto) {
@@ -103,10 +115,7 @@ public class SongifyCrudFacade {
 //            builder.artist(songFromDatabase.getArtist());
 //        }
         songUpdater.updateById(id, toSave);
-        return SongDto.builder()
-                .id(toSave.getId())
-                .name(toSave.getName())
-                .build();
+        return SongDto.builder().id(toSave.getId()).name(toSave.getName()).build();
 
     }
 
@@ -115,32 +124,15 @@ public class SongifyCrudFacade {
         songDeleter.deleteById(id);
     }
 
-    public Set<AlbumDto> findAlbumsByArtistId(Long artistId) {
-        return albumRetriever.findAlbumsDtoByArtistId(artistId);
-    }
+    //   public void deleteSongAndGenreById(Long songId) {
+    //   songDeleter.deleteSongAndGenreById(songId);
+    //    }
 
-    public ArtistDto updateArtistNameById(final Long artistId, String newArtistName) {
-        return artistUpdater.updateArtistNameById(artistId, newArtistName);
+    public void deleteArtistByIdWithAlbumsAndSongs(Long artistId) {
+        artistDeleter.deleteArtistByIdWithAlbumsAndSongs(artistId);
     }
 
     long countArtistsByAlbumId(final Long albumId) {
         return albumRetriever.countArtistsByAlbumId(albumId);
     }
-
-    public AlbumDto findAlbumById(final Long albumId) {
-        return albumRetriever.findDtoById(albumId);
-    }
-
-    public Set<AlbumDto> findAllAlbums() {
-        return albumRetriever.findAll();
-    }
-
-//   public void deleteSongAndGenreById(Long songId) {
-//   songDeleter.deleteSongAndGenreById(songId);
-//    }
-
-
-
-
-
 }

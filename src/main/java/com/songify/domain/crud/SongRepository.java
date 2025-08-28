@@ -5,7 +5,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
-
+import org.springframework.data.repository.query.Param;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -22,6 +22,13 @@ interface SongRepository extends Repository<Song, Long> {
             join fetch s.genre
             """)
     List<Song> findAll(Pageable pageable);
+
+    @Query("""
+              SELECT s FROM Song s
+              JOIN FETCH s.genre g
+              WHERE s.id IN :ids
+       """)
+    List<Song> findAllByIds(Set<Long> ids);
 
     @Query("SELECT s FROM Song s WHERE s.id =:id")
     Optional<Song> findById(Long id);

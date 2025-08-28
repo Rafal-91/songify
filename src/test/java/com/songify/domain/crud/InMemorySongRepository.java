@@ -1,12 +1,12 @@
 package com.songify.domain.crud;
 
 import org.springframework.data.domain.Pageable;
-
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
 class InMemorySongRepository implements SongRepository{
@@ -24,7 +24,17 @@ class InMemorySongRepository implements SongRepository{
 
     @Override
     public List<Song> findAll(final Pageable pageable) {
-        return null;
+        return db.values()
+                .stream()
+                .toList();
+    }
+
+    @Override
+    public List<Song> findAllByIds(final Set<Long> ids) {
+        return db.values()
+                .stream()
+                .filter(song -> ids.contains(song.getId()))
+                .toList();
     }
 
     @Override

@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
@@ -38,6 +37,10 @@ class Album extends BaseEntity {
 
     void addSongToAlbum(final Song song){
         songs.add(song);
+    }
+
+    void addSongsToAlbum(Set<Song> songs){
+        this.songs.addAll(songs);
     }
 
     void removeArtist(final Artist artist) {
