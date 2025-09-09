@@ -1,6 +1,8 @@
 package feature;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.songify.SongifyApplication;
+import com.songify.infrastructure.crud.song.controller.dto.response.GetAllSongsResponseDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -10,11 +12,18 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.ResultActions;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.hamcrest.Matchers.empty;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 
 @SpringBootTest(classes = SongifyApplication.class)
 @ActiveProfiles("integration")
@@ -37,9 +46,21 @@ class HappyPathIntegrationTest {
     @Test
     public void f() throws Exception {
 //        1. when I go to /song then I can see no songs
-        mockMvc.perform(get("/songs")
-                .contentType(MediaType.APPLICATION_JSON)
-        );
+//        mockMvc.perform(get("/songs")
+//                .contentType(MediaType.APPLICATION_JSON))
+//                .andExpect(status().isOk())
+//                .andExpect(jsonPath("$.songs",empty()));
+
+        ResultActions perform = mockMvc.perform(get("/songs")
+                        .contentType(MediaType.APPLICATION_JSON));
+
+        MvcResult getSongsActionResult = perform.andExpect(status().isOk())
+                .andReturn();
+
+        String contentAsString = getSongsActionResult.getResponse().getContentAsString();
+        GetAllSongsResponseDto allSongsResponseDto = new ObjectMapper().readValue(contentAsString, GetAllSongsResponseDto.class);
+        assertThat(allSongsResponseDto.songs().isEmpty());
+
 //        2. when I post to /song with Song "Till i collapse" then Song "Til i collapse" is returned with id 1
 //        3. when I post to /song with Song "Lose Yourself" then Song "Lose Yourself" is returned with id 2
 //        4. when I go to /genre then I can see only default genre with id 1
@@ -55,6 +76,7 @@ class HappyPathIntegrationTest {
 //        14. when I go to /albums/1 then I can see album with single song with id 1 and single artist with id 1
 //        15. when I put to /albums/1/songs/2 then Song with id 2 ("Lose Yourself") is added to Album with id 1 ("EminemAlbum1")
 //        16. when I go to /albums/1 then I can see album with 2 songs (id1 and id2)
+
 
 
     }
